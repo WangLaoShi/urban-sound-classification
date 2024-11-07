@@ -69,20 +69,23 @@ class Features:
 
         y, sr = librosa.load(audio_file, sr=None)
 
+        # MFCC（梅尔频率倒谱系数）
         mfcc = librosa.feature.mfcc(y=y, sr=sr)
-
+        # Chroma STFT（色度短时傅里叶变换）
         chroma_stft = librosa.feature.chroma_stft(y=y, sr=sr)
-
+        # RMS（均方根能量）
         rms = librosa.feature.rms(y=y)
-
+        # Zero Crossing Rate（过零率）
         zero = librosa.feature.zero_crossing_rate(y)
-
+        # MagPhase（幅相分解）
         S, phase = librosa.magphase(librosa.stft(y))
+        # Spectral Rolloff（谱滚降）
         rolloff = librosa.feature.spectral_rolloff(S=S, sr=sr)
-
+        # Onset Strength（起始强度）
         onset_env = librosa.onset.onset_strength(y=y, sr=sr)
 
         total = np.concatenate((mfcc, chroma_stft, rms, zero, rolloff, np.array([onset_env])), axis=0)
+
         return np.apply_along_axis(array_map, 1, total).flatten()
 
     def get_dataframe(self):
@@ -120,6 +123,8 @@ class Features:
                         save_path="../models/scalers/scaler_training.pkl",
                         save_scaler=False):
         """
+        Reference:00_Scalar.ipynb
+
         Scale the dataframe and optionally save the scaler on file.
 
         Args:
@@ -166,7 +171,8 @@ class Features:
                         n=0.95,
                         save_path="../models/pca/pca_training.pkl",
                         save_pca=False):
-        """Scale dataframe by fitting a PCA
+        """
+        Scale dataframe by fitting a PCA
 
         Args:
             dataframe (Pandas dataframe): Dataframe to process
