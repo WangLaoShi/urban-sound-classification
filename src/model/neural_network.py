@@ -3,7 +3,8 @@ from tensorflow import keras
 from tensorflow.keras import layers
 from sklearn.model_selection import GridSearchCV, RandomizedSearchCV, StratifiedKFold
 from sklearn.utils import class_weight
-from keras.wrappers.scikit_learn import KerasClassifier
+# from tensorflow.keras.wrappers.scikit_learn import KerasClassifier
+from scikeras.wrappers import KerasClassifier
 from ..data import Dataset
 from keras.callbacks import EarlyStopping
 import numpy as np

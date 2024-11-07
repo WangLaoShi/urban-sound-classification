@@ -7,3 +7,4 @@ dask==2021.10.0
 keras_nightly==2.5.0.dev2021032900
 keras==2.4.3
 scikit_learn==0.24.2
+scikeras
